@@ -39,6 +39,7 @@
 #import "RNPAudioVideo.h"
 #import "RNPPhoto.h"
 #import "RNPBackgroundRefresh.h"
+#import "RNPMediaLibrary.h"
 
 @interface ReactNativePermissions()
 @property (strong, nonatomic) RNPLocation *locationMgr;
@@ -125,6 +126,9 @@ RCT_REMAP_METHOD(getPermissionStatus, getPermissionStatus:(RNPType)type json:(id
         case RNPTypeBackgroundRefresh:
             status = [RNPBackgroundRefresh getStatus];
             break;
+        case RNPTypeMediaLibrary:
+            status = [RNPMediaLibrary getStatus];
+            break;
         default:
             break;
     }
@@ -147,6 +151,8 @@ RCT_REMAP_METHOD(requestPermission, permissionType:(RNPType)type json:(id)json r
             return [RNPPhoto request:resolve];
         case RNPTypeNotification:
             return [self requestNotification:json resolve:resolve];
+        case RNPTypeMediaLibrary:
+            return [RNPMediaLibrary request:resolve];
         default:
             break;
     }
